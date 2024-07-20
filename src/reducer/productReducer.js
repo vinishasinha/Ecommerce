@@ -43,7 +43,7 @@ const ProductReducer=(state,action)=>{
             case "SET_SINGLE_LOADING":
               return{
                   ...state,
-                  isLoading:true,
+                  isSingleLoading:true,
               };
           case "SET_SINGLE_PRODUCT":
             return{
