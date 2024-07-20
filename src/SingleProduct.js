@@ -4,7 +4,11 @@ import { useEffect } from "react";
 import { useProductContext } from "./context/productContex";
 import PageNavigation from "./components/PageNavigation";
 import MyImage from "./components/MyImage";
-import {Container } from "./styles/Container"
+import {Container } from "./styles/Container";
+import FormatPrice from "./Helpers/FormatPrice";
+import { TbTruckDelivery,TbReplace,} from "react-icons/tb";
+import { MdSecurity } from "react-icons/md";
+
 
 
 const API="https://api.pujakaitem.com/api/products";
@@ -37,8 +41,50 @@ if(isSingleloading){
           <MyImage imgs={image}/>
           </div>
           {/* product data  */}
-          <div>
+          <div className="product-data">
+            <h2>{name}</h2>
+            <p>{stars}</p>
+            <p>{reviews} reviews</p>
+            <p className="product-data-price">
+              MRP:
+              <del>
+                <FormatPrice price={price + 250000} />
+              </del>
+            </p>
+            <p className="product-data-price product-data-real-price">
+              Deal of the Day: <FormatPrice price={price} />
+            </p>
+            <p>{description}</p>
+            <div className="product-data-warranty">
+              <div className="product-warranty-data">
+                <TbTruckDelivery className="warranty-icon" />
+                <p>Free Delivery</p>
+              </div>
+              <div className="product-warranty-data">
+                <TbReplace className="warranty-icon" />
+                <p>30 days Replacement</p>
+              </div>
+              <div className="product-warranty-data">
+                <TbTruckDelivery className="warranty-icon" />
+                <p>Vinisha Delivered</p>
+              </div>
+              <div className="product-warranty-data">
+                <MdSecurity className="warranty-icon" />
+                <p>Year warrenty</p>
+              </div>
+             </div>
+             <div className="product-data-info">
+              <p>Available:
+                <span>{stock>0?"InStock":"Not Available"}</span>
+                </p>
+                <p>
+                  ID:<span>{id}</span>
+                </p>
+                <p>
+                  Brand:<span>{company}</span>
+                </p>
 
+             </div>
           </div>
           
 
