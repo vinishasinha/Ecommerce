@@ -8,7 +8,7 @@ import {Container } from "./styles/Container";
 import FormatPrice from "./Helpers/FormatPrice";
 import { TbTruckDelivery,TbReplace,} from "react-icons/tb";
 import { MdSecurity } from "react-icons/md";
-
+import Star from "./components/Star";
 
 
 const API="https://api.pujakaitem.com/api/products";
@@ -24,7 +24,8 @@ const SingleProduct = () => {
 
   useEffect(()=>{
      getSingleProduct(`${API}?id=${id}`);
-  },[]);
+  // eslint-disable-next-line
+    },[]);
 
 if(isSingleloading){
   return<div className="page_loading">...Loading</div>
@@ -43,8 +44,7 @@ if(isSingleloading){
           {/* product data  */}
           <div className="product-data">
             <h2>{name}</h2>
-            <p>{stars}</p>
-            <p>{reviews} reviews</p>
+            <Star stars={stars} reviews={reviews}/>
             <p className="product-data-price">
               MRP:
               <del>
@@ -100,6 +100,14 @@ const Wrapper = styled.section`
   .container {
     padding: 9rem 0;
   }
+
+  .product_images{
+  display:flex;
+  align-items:center;
+  }
+
+
+
   .product-data {
     display: flex;
     flex-direction: column;
