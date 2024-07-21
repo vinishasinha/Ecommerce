@@ -1,16 +1,33 @@
 import React from "react";
 import styled from "styled-components";
+import FilterSection from "./components/FilterSection";
+import ProductList from "./components/ProductList";
+import Sort from "./components/Sort";
 
 const Products = () => {
   return <Wrapper>
-    <h1>
-      product
-    </h1>
+    <div className="container grid grid-filter-column">
+      <div>
+        <FilterSection/>
+      </div>
+      <section className="product-view--sort">
+        <div className="sort-fliter">
+        <Sort/>
+        </div>
+        <div className="main-product">
+          <ProductList/>
+
+        </div>
+      
+
+      </section>
+
+    </div>
   </Wrapper>;
 };
 
 const Wrapper = styled.section`
-height: 100vh;
+
   .grid-filter-column {
     grid-template-columns: 0.2fr 1fr;
   }
