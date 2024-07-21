@@ -9,6 +9,7 @@ import FormatPrice from "./Helpers/FormatPrice";
 import { TbTruckDelivery,TbReplace,} from "react-icons/tb";
 import { MdSecurity } from "react-icons/md";
 import Star from "./components/Star";
+import AddToCart from "./components/AddToCart";
 
 
 const API="https://api.pujakaitem.com/api/products";
@@ -20,7 +21,7 @@ const SingleProduct = () => {
   const {id}=useParams();
   // console.log(id)
 
-  const {id:alias,name,image,company,price,description,category,stock,stars,reviews}=singleProduct;
+  const {id:alias,name,company,price,description,category,stock,stars,reviews,image}=singleProduct;
 
   useEffect(()=>{
      getSingleProduct(`${API}?id=${id}`);
@@ -38,8 +39,8 @@ if(isSingleloading){
       <PageNavigation title={name}/>
       <Container className="container">
         <div className="grid grid-two-column">
-          <div className="product_image">
-          <MyImage imgs={image}/>
+        <div className="product_images">
+            <MyImage imgs={image} />
           </div>
           {/* product data  */}
           <div className="product-data">
@@ -85,6 +86,8 @@ if(isSingleloading){
                 </p>
 
              </div>
+             <hr/>
+             {stock>0 && <AddToCart product={singleProduct}/>}
           </div>
           
 
