@@ -8,7 +8,8 @@ const FilterContext = createContext();
 const initialState = {
   filter_products: [],
   all_products: [],
-  grid_view: false,
+  grid_view: true,
+  sorting_value:"lowest",
 };
 
 export const FilterContextProvider = ({ children }) => {
@@ -26,6 +27,17 @@ export const FilterContextProvider = ({ children }) => {
     return dispatch({ type: "SET_LIST_VIEW" });
   };
 
+// sorting functin
+const sorting=(event)=>{
+  let userValue=event.target.value;
+  dispatch({type:"GET_SORT_VALUE",payload:userValue})
+};
+
+//sort the products
+useEffect(()=>{
+  dispatch({type:"SORTING_PRODUCTS"})
+// eslint-disable-next-line
+},[state.sorting_value]);
 
 
   useEffect(() => {
@@ -34,7 +46,7 @@ export const FilterContextProvider = ({ children }) => {
 
   return (
     <FilterContext.Provider
-      value={{ ...state, setGridView ,setListView}}>
+      value={{ ...state,sorting, setGridView ,setListView}}>
       {children}
     </FilterContext.Provider>
   );
