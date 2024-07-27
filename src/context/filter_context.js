@@ -10,6 +10,16 @@ const initialState = {
   all_products: [],
   grid_view: true,
   sorting_value:"lowest",
+  filters:{
+    text:"",
+    category:"all",
+    company:"all",
+    color:"all",
+    maxprice:0,
+    price:0,
+    minprice:0,
+
+  }
 };
 
 export const FilterContextProvider = ({ children }) => {
@@ -33,11 +43,31 @@ const sorting=(event)=>{
   dispatch({type:"GET_SORT_VALUE",payload:userValue})
 };
 
+//update the filter values
+const updateFilterValue=(event)=>{
+  let name=event.target.name;
+  let value=event.target.value;
+
+  return dispatch({type:"UPDATE_FILTER_VALUE",payload:{name,value}})
+
+};
+
+// to clear the filter
+const clearFilters =()=>{
+  dispatch({type:"CLEAR_FILTERS"});
+}
+
+
+
+
+
+
 //sort the products
 useEffect(()=>{
+  dispatch({type:"FILTER_PRODUCTS"})
   dispatch({type:"SORTING_PRODUCTS"})
 // eslint-disable-next-line
-},[state.sorting_value]);
+},[state.sorting_value,state.filters]);
 
 
   useEffect(() => {
@@ -46,7 +76,7 @@ useEffect(()=>{
 
   return (
     <FilterContext.Provider
-      value={{ ...state,sorting, setGridView ,setListView}}>
+      value={{ ...state,clearFilters,sorting, setGridView ,setListView,updateFilterValue}}>
       {children}
     </FilterContext.Provider>
   );
